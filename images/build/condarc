@@ -1,0 +1,16 @@
+channels:
+  - biobuilds
+  - defaults
+
+show_channel_urls: True
+update_dependencies: False
+anaconda_upload: False
+
+# `conda build` creates build environments in "$CONDA_BLD_PATH", which is often
+# in the "/src" volume mounted from the host. Since cross-device hard links are
+# not possible, conda's default behavior is to symlink when installing packages
+# in such environments. However, symlinks break (among other things) RPATH
+# determinations, which in turn, can cause things like `gcc` to fail horribly.
+# To work around this, we need to tell conda to always copy files rather than
+# symlink, even though copying is a fairly expensive (i.e., slow) operation.
+allow_softlinks: False
