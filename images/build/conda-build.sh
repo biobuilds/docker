@@ -82,8 +82,6 @@ for d in ${CONDA_PLATFORM} noarch; do
     find ${src_dir} -type f -name '*.tar.bz2' | \
         xargs --no-run-if-empty -I% cp -pv % ${dest_dir}
 
-    conda index ${dest_dir}
-
     find "${dest_dir}" -type f -newer /tmp/build_timestamp | \
         xargs --no-run-if-empty chown ${DEST_UID}:${DEST_GID}
 done
