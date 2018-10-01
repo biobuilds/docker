@@ -1,0 +1,7 @@
+[at__AT_REL__]
+name=Advance Toolchain Unicamp FTP
+baseurl=ftp://ftp.unicamp.br/pub/linuxpatch/toolchain/at/redhat/RHEL7
+failovermethod=priority
+enabled=1
+gpgcheck=1
+gpgkey=ftp://ftp.unicamp.br/pub/linuxpatch/toolchain/at/redhat/RHELX/gpg-pubkey-6976a827-5164221b

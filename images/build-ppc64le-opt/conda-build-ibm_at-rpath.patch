@@ -1,0 +1,25 @@
+--- lib/python3.6/site-packages/conda_build/post.py
++++ lib/python3.6/site-packages/conda_build/post.py
+@@ -15,6 +15,7 @@
+ import stat
+ from subprocess import call, check_output
+ import sys
++import platform
+ try:
+     from os import readlink
+ except ImportError:
+@@ -360,7 +361,13 @@
+         elif old.startswith('/'):
+             # Test if this absolute path is outside of prefix. That is fatal.
+             relpath = os.path.relpath(old, prefix)
+-            if relpath.startswith('..' + os.sep):
++            if (platform.machine() == 'ppc64le' and
++                    re.match(r'/opt/at\d+\.\d+/(lib|lib64)', old)):
++                # If present, keep the Advanced Toolchain's "lib" and "lib64"
++                # directories in the rpath of POWER binaries, or bad things may
++                # happen at runtime (e.g., using the wrong version of libc).
++                new.append(old)
++            elif relpath.startswith('..' + os.sep):
+                 print('Warning: rpath {0} is outside prefix {1} (removing it)'.format(old, prefix))
+             else:
+                 relpath = '$ORIGIN/' + os.path.relpath(old, origin)
