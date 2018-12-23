@@ -100,9 +100,9 @@ ENTRYPOINT ["/conda-build.sh"]
 # and "conda-verify") to avoid potential problems caused by having too big a
 # step from the existing to the desired versions of "conda", such as being
 # unable to find the desired "conda-build" and/or "conda-verify" packages.
-ARG CONDA_VERSION=4.5.11
-ARG CONDA_BUILD_VERSION=3.16.1
-ARG CONDA_VERIFY_VERSION=3.1.0
+ARG CONDA_VERSION=4.5.12
+ARG CONDA_BUILD_VERSION=3.16.3
+ARG CONDA_VERIFY_VERSION=3.1.1
 RUN ${MINICONDA_ROOT}/bin/conda install --yes --quiet \
         --override-channels -c defaults \
         conda==${CONDA_VERSION} \
